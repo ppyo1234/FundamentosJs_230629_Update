@@ -120,5 +120,31 @@ console.log(`El objeto actualmente tiene los siguientes valores `)
 console.log (JSON.stringify(Producto2,null,2))
 // console.log(Producto2);
 
+var tipoDisponibilidad= typeof(Producto2.Disponibilidad)
+console.log(`El tipo de dato de la disponibilidad es: ${tipoDisponibilidad}`)
+console.log(JSON.stringify(Producto2,null,2)); //Disponibilidad Boolean
+Producto2.Disponibilidad="Sí";
+let nuevoTipoDisponible= typeof(Producto2.Disponibilidad)
+console.log(Producto2);
+console.log(`El tipo de dato de la disponibilidad es: ${nuevoTipoDisponible}`)
 
+//AGREGAR NUEVAS PROPIEDADES AL OBJETO
+console.log("%c5.- Agregar nuevas propiedades al Objeto", style_console);
+//Para agregar una nueva propiedad utilizaremos el nombre del objeto los corchetes [] y el nuevo de la propiedad con su valor por defecto.
+console.log("Los datos actuales del comprador son: ")
+console.table(Comprador)
+Comprador[`Dirección`]="Av. Benito Juárez No. 1525, Interior 40, Xicotepec de JUárez, Puebla, México"
+Comprador[`Tipo`]="Nuevo Cliente"
+Comprador[`ActividadReciente`]= true
+Comprador[`TotalCompras`]=3516.25
+console.log("Despues de haber agregado las propiedades; Dirección, Tipo, ActividadReciente y TotalCompras... ")
+console.table(Comprador)
+
+//Eliminar propiedades existentes de un Objeto
+console.log("%c6.- Eliminar propiedades existentes de un Objeto", style_console);
+console.log("La estructura y valores del objeto PEDIDO son previos a la modificación:")
+console.table(Pedido)
+delete Pedido.TipoPago
+console.log("Despues de la modificación...")
+console.table(Pedido)
 
