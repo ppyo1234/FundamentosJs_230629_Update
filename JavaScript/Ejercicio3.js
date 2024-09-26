@@ -39,6 +39,7 @@ console.log(typeof(Producto_SKU));
 console.log("%c2.- Objeto", style_console);
 let Producto = 
 {
+    ID:100,
     Nombre : "Tenis Deportivos", 
     Marca: "Nike",
     Modelo: "Jordan '24", 
@@ -85,7 +86,7 @@ let Producto2 =
 
 let Comprador =
 {
-    Clave: 3216,
+    ID: 3216,
     Nombre: "Marco",
     Apellidos: "Ramírez Hernández",
     Tipo: "Frecuente",
@@ -95,8 +96,9 @@ let Comprador =
 }
 
 let Pedido= {
-    Producto_Clave: 316, 
-    Comprador_Clave: 3216,
+    ID:5816,
+    Producto_ID: 316, 
+    Comprador_ID: 3216,
     Cantidad: 2, 
     Estatus: "Carrito de Compra",
     TipoPago: "Tarjeta de Crédito"
@@ -251,18 +253,62 @@ console.log ("Los datos del cliente y sus habitos de compra son :")
 console.table(datosClientesPromociones)
 // Operaciones sobre Objetos 
 // Unión de Objetos 
-console.log("%c10.- Metodos para controlar la mutabilidad de los Objetos, Sellado (SEAL)", style_console);
+console.log("%c10.- Unión de Objetos usando el método de asignación (ASSING)", style_console);
 
+console.log ("Imprimimos la estrucutra y valores del objeto PRODUCTO");
+console.table(Producto);
+
+console.log("Imprimimos la estructura y valores del objeto PEDIDO")
+console.table(Pedido);
+
+//Suponiendo que los usuariols ya realizó el pago el pedido se convertira en una VENTA que requiere información de ambos objetos 
+const VENTA = Object.assign(Producto,Pedido);
+
+
+/// assign puede perder infromación asi que hay que teber cuidado
+console.log("Imprimimos ya las dos tablas juntas por el metodo assign")
+console.table(VENTA);
 // modificar valores no es mutación 
 
-//Para agregar una nueva propiedad utilizaremos el nombre del objeto los corchetes [] y el nuevo de la propiedad con su valor por defecto.// console.log("Los datos actuales del comprador son: ")
-// console.table(Comprador)
-// Comprador[`Dirección`]="Av. Benito Juárez No. 1525, Interior 40, Xicotepec de JUárez, Puebla, México"
-// Comprador[`Tipo`]="Nuevo Cliente"
-// Comprador[`ActividadReciente`]= true
-// Comprador[`TotalCompras`]=3516.25
-// console.log("Despues de haber agregado las propiedades; Dirección, Tipo, ActividadReciente y TotalCompras... ")
-// console.table(Comprador)// //Eliminar propiedades existentes de un Objeto
+let Producto3 = {...Producto}
+const Venta =Object.assign(Producto3,Pedido);
+console.log("Checamos")
+console.table(Venta)
 
 
 
+console.log("%c11.- Unión de Objetos usando el SPREAD OPERATOR (...)", style_console);
+
+Producto.ID=100
+
+let Venta2 = 
+{
+    Producto: {...Producto},
+    Comprador: {...Comprador},
+    Pedido: {...Pedido}
+}
+
+console.log("Fusionamos los 3 objetos en uno nuevo , sin perdida de información")
+console.log(Venta2);
+console.table(Venta2);
+
+
+// vamos a verificar el estatus de mutabilidad de los objetos
+console.log("Vamos a verificar el estatus de mutabilidad del objeto PEDIDO")
+console.log(`Esta el objeto de Pedido Congelado ? : ${Object.isFrozen(Pedido)}`);
+console.log(`Esta el objeto de Pedido Sellado ? : ${Object.isSealed(Pedido)}`);
+
+
+console.log("Vamos a verificar el estatus de mutabilidad del objeto COMPRADOR")
+console.log(`Esta el objeto de Pedido Congelado ? : ${Object.isFrozen(Comprador)}`);
+console.log(`Esta el objeto de Pedido Sellado ? : ${Object.isSealed(Comprador)}`);
+
+
+console.log("Vamos a verificar el estatus de mutabilidad del objeto PRODUCTO")
+console.log(`Esta el objeto de Pedido Congelado ? : ${Object.isFrozen(Producto)}`);
+console.log(`Esta el objeto de Pedido Sellado ? : ${Object.isSealed(Producto)}`);
+
+// Modificamos la estructura de producto , agregando una nueva propiedad 
+Producto[`isLegacy`] = false;
+console.log(Producto)
+console.table(Venta2)
