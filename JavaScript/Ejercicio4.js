@@ -144,7 +144,7 @@ for(let i = 0; i < numeroFilas; i++)
 
     console.table(estudiantes)
     console.log("Ahora agregamos a Derek, al comienza del arreglo.")
-    estudiantes.unshift("Matias")
+    estudiantes.unshift("Derek")
     console.log("La lista actual es: ")
     console.table(estudiantes)
 
@@ -159,12 +159,140 @@ for(let i = 0; i < numeroFilas; i++)
     console.log("%c8.- Eliminar el elemento de un arreglo en la primera posición (SHIFT)",style_console)
     console.log("El arreglo tiene los siguientes elementos:")
     console.table(estudiantes)
-    console.log("Para este caso eliminaremos a Raúl Pasos, en la primera posición.")
+    console.log("Para este caso eliminaremos a Matias, en la primera posición.")
     estudiantes.shift();
     console.log("Después de eliminar el elemento del arreglo quedo de la siguiente manera: ")
     console.table(estudiantes);
 
 
-    console.log("%c9.- Modificar un arreglo en un arreglo nuevo con posiciones definidas (SPLICE)", style_console)
-    console.log("El arreglo original tiene los elementos:")
+    console.log("%c9.- Modificar un arreglo en un arreglo nuevo con posiciones definidas (SPLICE)", style_console);
+    console.log("El arreglo original tiene los elementos: ")
+    console.table(estudiantes)
+    console.log("Dividir el arreglo en uno nuevo eliminando ciertos elementos en base a su posición ")
+    
+    //Cuando la función splice recibe un solo parámetro eliminará los elementos de esa posición en adelante
+    estudiantes.splice(2);
+    console.table(estudiantes)
+    
+    //Cuando la función splice recibe dos parámetros, se eliminan todos los elementos que no estes en ese rango
+    
+    estudiantes.push("Jose Arturo")
+    estudiantes.push("Paco Garcia")
+    estudiantes.push("Paco Flores")
+    estudiantes.push("Brisa")
+    estudiantes.push("Sayurid")
+    console.log("Se han agregado 5 nuevos estudiantes, por lo que el arreglo es: ")
+    console.table(estudiantes)
+    console.log("Ahora ya tenemos los elementos suficientes para aplicar el metodo splice con dos parámetros que serán 3,5")
+    estudiantes.splice(3,5)
+    console.log("Resultando en: ")
+    console.table(estudiantes)
+    
+    //splice sirve tambien para insertar elementos en posiciones especificos, ahora necesitamos insertar a : "Antonio Ocpaco" entre "Tania Ibarra" y "Edagar Cabrera"
+    console.log("Ahora vamos a insertar a \"Dulce\" en los elementos dela posición 0 y 1")
+    estudiantes.splice(1,0, "Dulce")
+    console.log("Resultando en:")
+    console.table(estudiantes)
+    
+    
+    //También splice sirve para reemplazar elementos por otros, en este caso remplazaremos a "Tania Ibarra" por "Brandon Leon"
+    
+    console.log("Ahora vamos a remplazar a \"Michelle\" en los elementos de la posición por \"Al farias\"")
+    estudiantes.splice(0,1, "Al farias")
+    console.log("Resultando en:")
+    console.table(estudiantes)
+
+
+
+    console.log("%c10.- Métodos para la manipulación de Arreglos INMUTABLES ", style_console);
+
+    let signosZodiacales= ["Aries","Tauro","Geminis","Cáncer","Leo", "Virgo","Libra","Escorpio","Sagitario","Capricornio","Acuario","Piscis"]
+
+    Object.freeze(signosZodiacales);
+
+    //Ninguna se ejecuta por que nuestro arreglo es inmutable
+    /*
+    signosZodiacales.push("Ofiuco");
+    signosZodiacales.unshift();
+    signosZodiacales.splice(6,2);
+    */
+
+    let [signo1,,signo3,,,,signo7,,,,,]=signosZodiacales;
+    console.log(`El primer signo zodiacal es : ${signo1}`)
+    console.log(`El tercer signo zodiacal es : ${signo3}`)
+    signo7 = "Naranja";
+    console.log(`El septimo signo zodiacal es : ${signo7}`)
+
+    console.log("%c11.- Filtrado de Elemento dentro de un arreglo utilizando el método FILTER", style_console);
+
     console.table(estudiantes);
+    //antes de filtrar datos llenemos el arreglo con 10 elementos
+    estudiantes.push("ppyin");
+    estudiantes.push("tere")
+    estudiantes.push("mauricio")
+    estudiantes.push("matias")
+    estudiantes.push("Jonathan Emannuel")
+    estudiantes.push("Daniel")
+    console.table(estudiantes)
+    
+    Object.freeze(estudiantes)
+    
+    //Filter es un método que recorre los elementos de un arreglo haciendo alguna tarea en específico, lo que tenemos que considerar es que este nuevo arreglo resultante es un objeto nuevo que pueda ser mutable.
+    
+    console.log("Filtrando los primeros 5 elementos")
+    let nuevoEstudiantes = estudiantes.filter((estudiante, index) => index<5);
+    console.table(nuevoEstudiantes);
+    
+    console.table(filtraPrimeros5(estudiantes));
+    
+    
+    
+    //filtrar a los estudiantes que su nombre tenga más de 15 carácteres
+    let nuevoEstudiantesNombre = estudiantes.filter((estudiante) => estudiante.length>15);
+    console.table(nuevoEstudiantesNombre);
+    
+    
+    
+    //Intentamos modificar el arreglo inmutable
+    /*estudiantes.pop()
+    console.table(estudiantes)*/
+    
+    
+    //Intentamos modificar el nuevo arreglo que no ha sido congelado
+    
+    nuevoEstudiantes.unshift("Adrian")
+    console.table(nuevoEstudiantes);
+    
+    function filtraPrimeros5 (arregloEstudiantes){
+    
+        let listaFiltrada=[]
+        for(let i=0; i<5; i++){
+            listaFiltrada.push(arregloEstudiantes[i]);
+     
+        }
+        return listaFiltrada;
+        
+    }
+
+    //filtrado de datos   -   Transformando los datos.
+console.log("%c12.- Filtrado de Elemento dentro de un arreglo utilizando el método MAP, en el que necesitamos transformarlos", style_console);
+
+console.log("Imprimimos los elementos actuales de signosZodiacales:")
+console.log(signosZodiacales);
+
+
+//que podemos hacer si necesitamos el mismo arreglo pero ahora con todos sus elementos con letras MAYUSCULAS
+
+console.table(signosZodiacales.map(signoZodiacal => signoZodiacal.toUpperCase()))
+
+
+//Reducción de elementos de un arreglo, se usa cuando debemos hacer operaciones matemáticos o cuantitativas a un arreglo, como obtener totales, la idea es reducir la lista a un valor más simplificado.
+    
+const costosListaCompras= [15, 52.50,16.90,32.50,28,105,45.2,94.10]
+
+//como podemos calcular el total de una lista de costos de un carrito de compras
+
+console.log("Los precios son: ")
+console.table(costosListaCompras)
+console.log(`El total de la compra es: ${costosListaCompras.reduce((total, precio)=> total+precio, 0).toFixed(2)}`)
+    
