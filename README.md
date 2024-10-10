@@ -17,6 +17,7 @@ Previo a iniciar el desarrollo de softwarepara web usando el framework de NodeJS
 |6.|Repaso de arreglos (Arrays)|Pendiente|Activa|
 
 
+
 ### Autor 
 José Arturo García González 
 Unidad 1 
